@@ -26,14 +26,12 @@ int CountProcess(const char* processName) {
 void tasks (char* binaryDirectoryFile) {
     while (TRUE) {
         int processCount = CountProcess(binaryDirectoryFile);
-        printf("%d", processCount);
         if (processCount == 0) {
             char* start = "start";
             char* symbol = " \"";
             int lenth = strlen(start) + (strlen(symbol) * 2) + strlen(binaryDirectoryFile);
             char* command = malloc(sizeof(char) * lenth);
             snprintf(command, lenth, "start \"%s\"", binaryDirectoryFile);
-            printf(command);
             system(command);
         }
         Sleep(800);
