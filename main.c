@@ -14,7 +14,6 @@ int CountProcess(const char* processName) {
     if (Process32First(snapshot, &entry)) {
         while (Process32Next(snapshot, &entry)) {
             if (strstr(processName, entry.szExeFile)) {
-                printf("%s \n", entry.szExeFile);
                 exists += 1;
             }
         }
@@ -27,10 +26,17 @@ int CountProcess(const char* processName) {
 void tasks (char* binaryDirectoryFile) {
     while (TRUE) {
         int processCount = CountProcess(binaryDirectoryFile);
-        if (processCount > 0) {
-            system(binaryDirectoryFile);
+        printf("%d", processCount);
+        if (processCount == 0) {
+            char* start = "start";
+            char* symbol = " \"";
+            int lenth = strlen(start) + (strlen(symbol) * 2) + strlen(binaryDirectoryFile);
+            char* command = malloc(sizeof(char) * lenth);
+            snprintf(command, lenth, "start \"%s\"", binaryDirectoryFile);
+            printf(command);
+            system(command);
         }
-        Sleep(1000);
+        Sleep(800);
     }
 }
 
