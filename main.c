@@ -33,6 +33,7 @@ void tasks (char* binaryDirectoryFile) {
             char* command = malloc(sizeof(char) * lenth);
             snprintf(command, lenth, "start \"%s\"", binaryDirectoryFile);
             system(command);
+            free(command);
         }
         Sleep(800);
     }
